@@ -21,8 +21,10 @@ import com.simplemobiletools.commons.views.MyRecyclerView
 import kotlinx.android.synthetic.main.item_alarm.view.*
 import java.util.*
 
-class AlarmsAdapter(activity: SimpleActivity, var alarms: ArrayList<Alarm>, val toggleAlarmInterface: ToggleAlarmInterface,
-                    recyclerView: MyRecyclerView, itemClick: (Any) -> Unit) : MyRecyclerViewAdapter(activity, recyclerView, null, itemClick) {
+class AlarmsAdapter(
+    activity: SimpleActivity, var alarms: ArrayList<Alarm>, val toggleAlarmInterface: ToggleAlarmInterface,
+    recyclerView: MyRecyclerView, itemClick: (Any) -> Unit
+) : MyRecyclerViewAdapter(activity, recyclerView, itemClick) {
 
     init {
         setupDragListener(true)
