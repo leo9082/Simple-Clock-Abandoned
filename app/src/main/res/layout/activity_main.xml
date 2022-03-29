@@ -15,12 +15,12 @@
         app:tabMinWidth="150dp"
         app:tabSelectedTextColor="@android:color/white">
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_clock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/clock_tab"
-            android:icon="@drawable/ic_clock_vector" />
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/tab_clock"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:contentDescription="@string/clock_tab"-->
+<!--            android:icon="@drawable/ic_clock_vector" />-->
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_alarm"
@@ -36,12 +36,13 @@
             android:contentDescription="@string/stopwatch_tab"
             android:icon="@drawable/ic_stopwatch_vector" />
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_timer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/timer_tab"
-            android:icon="@drawable/ic_hourglass_vector" />
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/tab_timer"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:contentDescription="@string/timer_tab"-->
+<!--            android:visibility="gone"-->
+<!--            android:icon="@drawable/ic_hourglass_vector" />-->
     </com.google.android.material.tabs.TabLayout>
 
     <com.duolingo.open.rtlviewpager.RtlViewPager

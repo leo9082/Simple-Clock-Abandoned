@@ -41,9 +41,9 @@ const val ALARM_NOTIF_ID = 9998
 const val TIMER_RUNNING_NOTIF_ID = 10000
 
 const val OPEN_TAB = "open_tab"
-const val TAB_CLOCK = 0
-const val TAB_ALARM = 1
-const val TAB_STOPWATCH = 2
+const val TAB_CLOCK = 2
+const val TAB_ALARM = 0
+const val TAB_STOPWATCH = 1
 const val TAB_TIMER = 3
 const val TIMER_ID = "timer_id"
 const val INVALID_TIMER_ID = -1
