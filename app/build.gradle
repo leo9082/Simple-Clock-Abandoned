@@ -20,6 +20,12 @@ android {
         versionName "5.6.1"
         setProperty("archivesBaseName", "clock")
         vectorDrawables.useSupportLibrary = true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                 "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     signingConfigs {
