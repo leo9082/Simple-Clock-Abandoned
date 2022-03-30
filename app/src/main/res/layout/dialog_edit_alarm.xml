@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/edit_alarm_scrollview"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/edit_alarm_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/edit_alarm_holder"
@@ -19,7 +19,7 @@
             android:background="?attr/selectableItemBackground"
             android:padding="@dimen/tiny_margin"
             android:textSize="@dimen/alarm_text_size"
-            tools:text="07:00" />
+            tools:text="07:00"/>
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/edit_alarm_dayless_label"
@@ -31,7 +31,7 @@
             android:layout_toEndOf="@+id/edit_alarm_time"
             android:gravity="center_vertical"
             android:textSize="@dimen/bigger_text_size"
-            tools:text="@string/tomorrow" />
+            tools:text="@string/tomorrow"/>
 
         <LinearLayout
             android:id="@+id/edit_alarm_days_holder"
@@ -41,53 +41,90 @@
             android:layout_marginStart="@dimen/activity_margin"
             android:layout_marginTop="@dimen/medium_margin"
             android:layout_marginBottom="@dimen/medium_margin"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"/>
 
-        <RelativeLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="horizontal"
             android:id="@+id/edit_alarm_vibrate_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edit_alarm_days_holder"
             android:background="?attr/selectableItemBackground"
             android:paddingStart="@dimen/activity_margin"
-            android:paddingTop="@dimen/normal_margin"
-            android:paddingEnd="@dimen/activity_margin"
-            android:paddingBottom="@dimen/normal_margin">
+            android:paddingEnd="@dimen/activity_margin">
 
-            <ImageView
-                android:id="@+id/edit_alarm_vibrate_icon"
+            <com.simplemobiletools.commons.views.MyTextView
+                android:id="@+id/label_alarm_vibrate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/edit_alarm_vibrate"
-                android:layout_alignBottom="@+id/edit_alarm_vibrate"
-                android:src="@drawable/ic_vibrate_vector" />
+                android:background="?attr/selectableItemBackground"
+                android:drawableLeft="@drawable/ic_vibrate_vector"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/normal_margin"
+                android:paddingBottom="@dimen/normal_margin"
+                android:drawablePadding="@dimen/normal_margin"
+                android:textSize="@dimen/normal_text_size"
+                android:text="@string/vibrate"/>
 
             <com.simplemobiletools.commons.views.MyAppCompatCheckbox
                 android:id="@+id/edit_alarm_vibrate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/edit_alarm_vibrate_icon"
+                android:layout_toEndOf="@+id/label_alarm_vibrate"
                 android:background="@null"
                 android:clickable="false"
                 android:layoutDirection="rtl"
-                android:padding="@dimen/medium_margin"
-                android:text="@string/vibrate" />
+                android:padding="@dimen/medium_margin"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </RelativeLayout>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:id="@+id/edit_alarm_get_up_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_alarm_vibrate_holder"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/activity_margin"
+            android:paddingEnd="@dimen/activity_margin">
+
+            <com.simplemobiletools.commons.views.MyTextView
+                android:id="@+id/label_alarm_get_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:drawableLeft="@drawable/ic_getup"
+                android:paddingTop="@dimen/normal_margin"
+                android:paddingBottom="@dimen/normal_margin"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/normal_margin"
+                android:textSize="@dimen/normal_text_size"
+                android:text="@string/get_up"/>
+
+            <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+                android:id="@+id/edit_alarm_get_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:clickable="false"
+                android:layoutDirection="rtl"
+                android:padding="@dimen/medium_margin"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/edit_alarm_sound"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/edit_alarm_vibrate_holder"
+            android:layout_below="@+id/edit_alarm_get_up_holder"
             android:background="?attr/selectableItemBackground"
             android:drawableLeft="@drawable/ic_bell_vector"
             android:drawablePadding="@dimen/normal_margin"
             android:paddingStart="@dimen/activity_margin"
+            android:gravity="center_vertical"
             android:paddingTop="@dimen/normal_margin"
             android:paddingBottom="@dimen/normal_margin"
             android:textSize="@dimen/normal_text_size"
-            tools:text="Default alarm" />
+            tools:text="Default alarm"/>
 
         <ImageView
             android:id="@+id/edit_alarm_label_image"
@@ -99,7 +136,7 @@
             android:layout_marginStart="@dimen/activity_margin"
             android:layout_marginEnd="@dimen/tiny_margin"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_label_vector" />
+            android:src="@drawable/ic_label_vector"/>
 
         <com.simplemobiletools.commons.views.MyEditText
             android:id="@+id/edit_alarm_label"
@@ -113,7 +150,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/normal_text_size" />
+            android:textSize="@dimen/normal_text_size"/>
 
     </RelativeLayout>
 </ScrollView>

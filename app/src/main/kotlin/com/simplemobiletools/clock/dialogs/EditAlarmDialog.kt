@@ -58,11 +58,17 @@ class EditAlarmDialog(val activity: SimpleActivity, val alarm: Alarm, val callba
                     })
             }
 
-            edit_alarm_vibrate_icon.setColorFilter(textColor)
+            label_alarm_vibrate.colorCompoundDrawable(textColor)
             edit_alarm_vibrate.isChecked = alarm.vibrate
             edit_alarm_vibrate_holder.setOnClickListener {
                 edit_alarm_vibrate.toggle()
                 alarm.vibrate = edit_alarm_vibrate.isChecked
+            }
+
+            label_alarm_get_up.colorCompoundDrawable(textColor)
+            edit_alarm_get_up_holder.setOnClickListener {
+                edit_alarm_get_up.toggle()
+                // TODO: 2022/3/30 设置为起床铃声
             }
 
             edit_alarm_label_image.applyColorFilter(textColor)
