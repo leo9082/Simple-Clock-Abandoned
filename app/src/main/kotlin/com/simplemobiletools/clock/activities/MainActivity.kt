@@ -1,6 +1,7 @@
 package com.simplemobiletools.clock.activities
 
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
@@ -28,6 +29,7 @@ class MainActivity : SimpleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initConfigColor()
         setContentView(R.layout.activity_main)
         appLaunched(BuildConfig.APPLICATION_ID)
         storeStateVariables()
@@ -38,6 +40,12 @@ class MainActivity : SimpleActivity() {
                 rescheduleEnabledAlarms()
             }
         }
+    }
+
+    private fun initConfigColor() {
+        config.textColor = Color.parseColor("#333333")
+        config.backgroundColor = Color.parseColor("#FFFFFF")
+        config.primaryColor = Color.parseColor("#0055A2")
     }
 
     override fun onResume() {
