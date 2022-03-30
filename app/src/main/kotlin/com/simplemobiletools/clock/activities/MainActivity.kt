@@ -77,6 +77,8 @@ class MainActivity : SimpleActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         menu.apply {
+            findItem(R.id.settings).isVisible = false
+            findItem(R.id.about).isVisible = false
             findItem(R.id.sort).isVisible = view_pager.currentItem == TAB_ALARM
             updateMenuItemColors(this)
         }
