@@ -15,25 +15,27 @@ import com.simplemobiletools.clock.activities.ReminderActivity
 import com.simplemobiletools.clock.extensions.*
 import com.simplemobiletools.clock.helpers.ALARM_ID
 import com.simplemobiletools.clock.helpers.ALARM_NOTIF_ID
+import com.simplemobiletools.clock.models.AlarmEvent
 import com.simplemobiletools.clock.services.ScreenService
 import com.simplemobiletools.commons.extensions.showErrorToast
 import com.simplemobiletools.commons.helpers.isOreoPlus
+import org.greenrobot.eventbus.EventBus
 
 class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         val id = intent.getIntExtra(ALARM_ID, -1)
         val alarm = context.dbHelper.getAlarmWithId(id) ?: return
-
-        if (alarm.wake && ScreenService.isWakeUp()) {
-            return
-        }
         if (context.isScreenOn()) {
             context.showAlarmNotification(alarm)
             Handler().postDelayed({
                 context.hideNotification(id)
             }, context.config.alarmMaxReminderSecs * 1000L)
         } else {
+            if (alarm.wake && ScreenService.isWakeUp()) {
+                EventBus.getDefault().post(AlarmEvent.Update(id))
+                return
+            }
             if (isOreoPlus()) {
                 val audioAttributes = AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ALARM)
