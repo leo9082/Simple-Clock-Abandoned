@@ -14,6 +14,7 @@ import com.simplemobiletools.clock.extensions.config
 import com.simplemobiletools.clock.extensions.getNextAlarm
 import com.simplemobiletools.clock.extensions.rescheduleEnabledAlarms
 import com.simplemobiletools.clock.helpers.*
+import com.simplemobiletools.clock.services.ScreenService
 import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.helpers.LICENSE_NUMBER_PICKER
 import com.simplemobiletools.commons.helpers.LICENSE_RTL
@@ -39,6 +40,13 @@ class MainActivity : SimpleActivity() {
             ensureBackgroundThread {
                 rescheduleEnabledAlarms()
             }
+        }
+        startScreenService()
+    }
+
+    private fun startScreenService() {
+        Intent(this, ScreenService::class.java).apply {
+            startService(this)
         }
     }
 

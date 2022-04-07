@@ -24,6 +24,7 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
     private val COL_SOUND_TITLE = "sound_title"
     private val COL_SOUND_URI = "sound_uri"
     private val COL_LABEL = "label"
+    private val COL_WAKE = "wake"
 
     private val mDb = writableDatabase
 
@@ -41,8 +42,10 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE $ALARMS_TABLE_NAME ($COL_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COL_TIME_IN_MINUTES INTEGER, $COL_DAYS INTEGER, " +
-            "$COL_IS_ENABLED INTEGER, $COL_VIBRATE INTEGER, $COL_SOUND_TITLE TEXT, $COL_SOUND_URI TEXT, $COL_LABEL TEXT)")
+        db.execSQL(
+            "CREATE TABLE $ALARMS_TABLE_NAME ($COL_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COL_TIME_IN_MINUTES INTEGER, $COL_DAYS INTEGER, " +
+                "$COL_IS_ENABLED INTEGER, $COL_VIBRATE INTEGER, $COL_SOUND_TITLE TEXT, $COL_SOUND_URI TEXT, $COL_LABEL TEXT, $COL_WAKE INTEGER)"
+        )
         insertInitialAlarms(db)
     }
 
@@ -101,6 +104,7 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
             put(COL_SOUND_TITLE, alarm.soundTitle)
             put(COL_SOUND_URI, alarm.soundUri)
             put(COL_LABEL, alarm.label)
+            put(COL_WAKE, alarm.wake)
         }
     }
 
@@ -108,7 +112,7 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
 
     fun getAlarms(): ArrayList<Alarm> {
         val alarms = ArrayList<Alarm>()
-        val cols = arrayOf(COL_ID, COL_TIME_IN_MINUTES, COL_DAYS, COL_IS_ENABLED, COL_VIBRATE, COL_SOUND_TITLE, COL_SOUND_URI, COL_LABEL)
+        val cols = arrayOf(COL_ID, COL_TIME_IN_MINUTES, COL_DAYS, COL_IS_ENABLED, COL_VIBRATE, COL_SOUND_TITLE, COL_SOUND_URI, COL_LABEL, COL_WAKE)
         var cursor: Cursor? = null
         try {
             cursor = mDb.query(ALARMS_TABLE_NAME, cols, null, null, null, null, null)
@@ -123,8 +127,9 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
                         val soundTitle = cursor.getStringValue(COL_SOUND_TITLE)
                         val soundUri = cursor.getStringValue(COL_SOUND_URI)
                         val label = cursor.getStringValue(COL_LABEL)
+                        val wake = cursor.getIntValue(COL_WAKE) == 1
 
-                        val alarm = Alarm(id, timeInMinutes, days, isEnabled, vibrate, soundTitle, soundUri, label)
+                        val alarm = Alarm(id, timeInMinutes, days, isEnabled, vibrate, soundTitle, soundUri, label, wake)
                         alarms.add(alarm)
                     } catch (e: Exception) {
                         continue

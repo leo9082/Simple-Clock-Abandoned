@@ -19,7 +19,6 @@ import com.simplemobiletools.commons.dialogs.SelectAlarmSoundDialog
 import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.models.AlarmSound
 import kotlinx.android.synthetic.main.dialog_edit_alarm.view.*
-import java.util.*
 
 class EditAlarmDialog(val activity: SimpleActivity, val alarm: Alarm, val callback: (alarmId: Int) -> Unit) {
     private val view = activity.layoutInflater.inflate(R.layout.dialog_edit_alarm, null)
@@ -66,9 +65,10 @@ class EditAlarmDialog(val activity: SimpleActivity, val alarm: Alarm, val callba
             }
 
             label_alarm_get_up.colorCompoundDrawable(textColor)
+            edit_alarm_get_up.isChecked = alarm.wake
             edit_alarm_get_up_holder.setOnClickListener {
                 edit_alarm_get_up.toggle()
-                // TODO: 2022/3/30 设置为起床铃声
+                alarm.wake = edit_alarm_get_up.isChecked
             }
 
             edit_alarm_label_image.applyColorFilter(textColor)

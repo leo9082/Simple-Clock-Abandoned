@@ -15,6 +15,7 @@ import com.simplemobiletools.clock.activities.ReminderActivity
 import com.simplemobiletools.clock.extensions.*
 import com.simplemobiletools.clock.helpers.ALARM_ID
 import com.simplemobiletools.clock.helpers.ALARM_NOTIF_ID
+import com.simplemobiletools.clock.services.ScreenService
 import com.simplemobiletools.commons.extensions.showErrorToast
 import com.simplemobiletools.commons.helpers.isOreoPlus
 
@@ -24,6 +25,9 @@ class AlarmReceiver : BroadcastReceiver() {
         val id = intent.getIntExtra(ALARM_ID, -1)
         val alarm = context.dbHelper.getAlarmWithId(id) ?: return
 
+        if (alarm.wake && ScreenService.isWakeUp()) {
+            return
+        }
         if (context.isScreenOn()) {
             context.showAlarmNotification(alarm)
             Handler().postDelayed({

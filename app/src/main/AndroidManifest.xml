@@ -75,6 +75,12 @@
 
         <service android:name=".services.TimerService" />
 
+        <service
+            android:name=".services.ScreenService"
+            android:enabled="true"
+            android:exported="false">
+        </service>
+
         <receiver android:name=".receivers.AlarmReceiver" />
 
         <receiver android:name=".receivers.HideTimerReceiver" />
