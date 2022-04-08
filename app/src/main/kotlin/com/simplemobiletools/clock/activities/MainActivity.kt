@@ -21,6 +21,7 @@ import com.simplemobiletools.commons.helpers.LICENSE_RTL
 import com.simplemobiletools.commons.helpers.LICENSE_STETHO
 import com.simplemobiletools.commons.helpers.ensureBackgroundThread
 import com.simplemobiletools.commons.models.FAQItem
+import com.xdandroid.hellodaemon.IntentWrapper
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : SimpleActivity() {
@@ -48,6 +49,7 @@ class MainActivity : SimpleActivity() {
         Intent(this, ScreenService::class.java).apply {
             startService(this)
         }
+        IntentWrapper.whiteListMatters(this, "请添加白名单来保证应用运行")
     }
 
     private fun initConfigColor() {
@@ -217,5 +219,9 @@ class MainActivity : SimpleActivity() {
         )
 
         startAboutActivity(R.string.app_name, licenses, BuildConfig.VERSION_NAME, faqItems, true)
+    }
+
+    override fun onBackPressed() {
+        IntentWrapper.onBackPressed(this)
     }
 }
