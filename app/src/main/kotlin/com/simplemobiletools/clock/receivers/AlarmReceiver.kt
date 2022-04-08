@@ -33,6 +33,9 @@ class AlarmReceiver : BroadcastReceiver() {
             }, context.config.alarmMaxReminderSecs * 1000L)
         } else {
             if (alarm.wake && ScreenService.isWakeUp()) {
+                if (alarm.days > 0) {
+                    return
+                }
                 EventBus.getDefault().post(AlarmEvent.Update(id))
                 return
             }
