@@ -1,14 +1,59 @@
 package com.simplemobiletools.clock.services
 
-import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
+import android.util.Log
+import com.xdandroid.hellodaemon.AbsWorkService
 
-class ScreenService : Service() {
+class ScreenService : AbsWorkService() {
+
+    override fun shouldStopService(intent: Intent?, flags: Int, startId: Int): Boolean {
+        Log.e("ScreenService", "shouldStopService")
+        return shouldStop
+    }
+
+    override fun isWorkRunning(intent: Intent?, flags: Int, startId: Int): Boolean {
+        Log.e("ScreenService", "isWorkRunning")
+        return isRunning
+    }
+
+    override fun startWork(intent: Intent?, flags: Int, startId: Int) {
+        Log.e("ScreenService", "startWork")
+        val filter = IntentFilter()
+        filter.addAction(Intent.ACTION_SCREEN_OFF)
+        filter.addAction(Intent.ACTION_SCREEN_ON)
+        registerReceiver(receiver, filter)
+        isRunning = true
+    }
+
+    override fun stopWork(intent: Intent?, flags: Int, startId: Int) {
+        Log.e("ScreenService", "stopWork")
+        shouldStop = true
+        unregisterReceiver(receiver)
+        cancelJobAlarmSub()
+        isRunning = false
+    }
+
+    override fun onBind(intent: Intent?, alwaysNull: Void?): IBinder? {
+        Log.e("ScreenService", "onBind")
+        return null
+    }
+
+    override fun onServiceKilled(rootIntent: Intent?) {
+        Log.e("ScreenService", "onServiceKilled")
+    }
+
     companion object {
+        private var shouldStop = false
+        private var isRunning = false
+
+        fun stop() {
+            shouldStop = true
+        }
+
         private var screenOn = System.currentTimeMillis()
         private var screenOff = -1L
         private var screenDuration = 0L
@@ -38,28 +83,5 @@ class ScreenService : Service() {
                 }
             }
         }
-    }
-
-    override fun onBind(intent: Intent?): IBinder? = null
-
-    override fun onCreate() {
-        super.onCreate()
-        startCheck()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        stopCheck()
-    }
-
-    private fun startCheck() {
-        val filter = IntentFilter()
-        filter.addAction(Intent.ACTION_SCREEN_OFF)
-        filter.addAction(Intent.ACTION_SCREEN_ON)
-        registerReceiver(receiver, filter)
-    }
-
-    private fun stopCheck() {
-        unregisterReceiver(receiver)
     }
 }
